@@ -1,12 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import Button from '@material-ui/core/Button';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import About from "views/About"
+import Article from "views/Article"
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import {
+    BrowserRouter ,
+	Route,
+	Switch,
+	Redirect,
+	Link
+} from "react-router-dom";
+
+
+class Home extends React.Component {
+	render() {
+		return (
+            <div>
+                <ul>
+                    <li>
+                        <Button><Link to='/'>home</Link></Button>
+                    </li>
+                    <li>
+                        <Button><Link to='/about'>about</Link></Button>
+                    </li>
+                    <li>
+                        <Button><Link to='/article'>article</Link></Button>
+                    </li>
+                </ul>
+                <h1>This is home page</h1>
+            </div>
+		)
+	}
+}
+
+
+ReactDOM.render(
+
+    <BrowserRouter>
+        <Route path="/" exact render={() => <Home />} />
+        <Route path="/about" render={() => <About />} />
+        <Route path="/article" render={() => <Article />} />
+    </BrowserRouter>,
+
+	document.getElementById("root")
+);
