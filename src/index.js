@@ -1,48 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createBrowserHistory } from "history";
 import Button from '@material-ui/core/Button';
+
+
+import {
+	Route,
+    Switch,
+    Router
+} from "react-router-dom";
 
 import About from "views/About"
 import Article from "views/Article"
-
-import {
-    BrowserRouter ,
-	Route,
-	Switch,
-	Redirect,
-	Link
-} from "react-router-dom";
-
-
-class Home extends React.Component {
-	render() {
-		return (
-            <div>
-                <ul>
-                    <li>
-                        <Button><Link to='/'>home</Link></Button>
-                    </li>
-                    <li>
-                        <Button><Link to='/about'>about</Link></Button>
-                    </li>
-                    <li>
-                        <Button><Link to='/article'>article</Link></Button>
-                    </li>
-                </ul>
-                <h1>This is home page</h1>
-            </div>
-		)
-	}
-}
-
+import Home from "views/Home"
+var hist = createBrowserHistory();
 
 ReactDOM.render(
-
-    <BrowserRouter>
-        <Route path="/" exact render={() => <Home />} />
-        <Route path="/about" render={() => <About />} />
-        <Route path="/article" render={() => <Article />} />
-    </BrowserRouter>,
-
-	document.getElementById("root")
+    <Router history={hist}>
+        <Switch>
+            <Route path="/landing-page" component={Home} />
+            <Route path="/profile-page" component={About} />
+            <Route path="/login-page" component={Article} />
+        </Switch>
+    </Router>,
+    document.getElementById("root")
 );
